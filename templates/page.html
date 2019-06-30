@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block headseo %}
+<title>{{ page.title }}</title>
+<meta name="description" content="{{ page.description }}" />
+{% endblock headseo %}
+
+{% block content %}
+<article>
+  <header style="font-size: 1.2em">
+    <h1>{{ page.title }}</h1>
+    <div>
+      <span>{{ page.reading_time }} minutes read. </span>
+      <span>
+        Published: <time>{{ page.date }}</time>
+      </span>
+    </div>
+  </header>
+  {{ page.content | safe }}
+
+  {% if page.taxonomies.tags %}
+  Tags:
+  {% for tag in page.taxonomies.tags %}
+  <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}">#{{tag}}</a>
+  {% endfor %}
+  {% endif %}
+
+</article>
+{% endblock content %}

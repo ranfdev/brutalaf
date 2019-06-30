@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if config.title %}
+<header>
+    <h1>{{ config.title }}</h1>
+    {{ config.description }}
+</header>
+{% endif %}
+
+<section>
+    {% block content_title %}
+    <h2>Articles: </h2>
+    {% endblock content_title %}
+    <ul>
+        {% for page in paginator.pages | reverse %}
+        <li>
+            <article>
+                <header>
+                    <h3>
+                        <a href="{{ page.permalink }}">{{ page.title }}</a>
+                    </h3>
+                    <div>
+                        <span>{{ page.reading_time }} minutes read. </span>
+                        <span>
+                            Published: <time>{{ page.date }}</time>
+                        </span>
+                    </div>
+                </header>
+                {{ page.summary | safe }}
+            </article>
+        </li>
+
+        {% endfor %}
+    </ul>
+</section>
+
+<nav>
+    {% if paginator.previous %}
+    <a href="{{ paginator.previous }}">Previous</a>
+    {% endif %}
+
+    <span>Page {{ paginator.current_index }} of {{ paginator.number_pagers }}</span>
+
+    {% if paginator.next %}
+    <a href="{{ paginator.next }}">Next</a>
+    {% endif %}
+</nav>
+
+{% endblock content %}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    {% if config.generate_rss %}
+    <link rel="alternate" href="rss.xml" type="application/rss+xml" title="ranfdev rss">
+    {% endif %}
+
+    {% block headseo %}
+    <title>{{page.title | default(value=config.title | safe)}}</title>
+    <meta name="description" content="{{page.description | default(value=config.description | safe)}}">
+    {% endblock headseo %}
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+                Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 15px
+        }
+
+        nav a {
+            margin-right: 10px;
+        }
+
+        article header * {
+            margin-bottom: 0;
+        }
+
+        ul {
+            padding-left: 1em;
+        }
+
+        pre {
+            padding: 10px;
+        }
+
+        img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    {% block navbar %}
+    {% if config.extra.theme_menu %}
+    <nav>
+      <a href="{{config.base_url}}">{{config.title}}</a>
+        {% for item in config.extra.theme_menu %}
+        <a style="float: right" href="{{item.url | safe | replace (from = "$BASE_URL", to=config.base_url)}}">
+            {{item.name}}
+        </a>
+        {%endfor%}
+    </nav>
+    {% endif %}
+    {% endblock navbar %}
+
+
+    {% block content %}
+    <div class="container">
+        {{ page.content | safe }}
+    </div>
+    {% endblock content %}
+
+</body>
+
+</html>
