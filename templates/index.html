@@ -13,7 +13,7 @@
     <h2>Articles: </h2>
     {% endblock content_title %}
     <ul>
-        {% for page in paginator.pages | reverse %}
+        {% for page in section.pages %}
         <li>
             <article>
                 <header>
@@ -35,16 +35,5 @@
     </ul>
 </section>
 
-<nav>
-    {% if paginator.previous %}
-    <a href="{{ paginator.previous }}">Previous</a>
-    {% endif %}
-
-    <span>Page {{ paginator.current_index }} of {{ paginator.number_pagers }}</span>
-
-    {% if paginator.next %}
-    <a href="{{ paginator.next }}">Next</a>
-    {% endif %}
-</nav>
 
 {% endblock content %}
