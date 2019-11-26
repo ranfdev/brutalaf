@@ -1,5 +1,29 @@
-{% extends "index.html" %}
+{% extends "base.html" %}
 
-{% block content_title %}
+{% block content %}
+<div class="container">
 <h2>Articles tagged {{ term.name }}:</h2>
-{% endblock content_title %}
+<ul>
+  {% for page in term.pages %}
+  <li>
+    <article>
+      <header>
+        <h3>
+          <a href="{{ page.permalink }}">{{ page.title }}</a>
+        </h3>
+        <div>
+          <span>{{ page.reading_time }} minutes read. </span>
+          <span>
+            Published: <time>{{ page.date }}</time>
+          </span>
+        </div>
+      </header>
+      {{ page.summary | safe }}
+    </article>
+  </li>
+
+  {% endfor %}
+</ul>
+</div>
+{% endblock content %}
+
