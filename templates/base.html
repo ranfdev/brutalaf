@@ -38,11 +38,12 @@
 
         pre {
             padding: 10px;
+            overflow: auto;
         }
 
         img {
             width: 100%;
-        }
+        }        
     </style>
 </head>
 
@@ -50,7 +51,7 @@
     {% block navbar %}
     {% if config.extra.theme_menu %}
     <nav>
-      <a href="{{config.base_url}}">{{config.title}}</a>
+        <a href="{{config.base_url}}">{{config.title}}</a>
         {% for item in config.extra.theme_menu %}
         <a style="float: right" href="{{item.url | safe | replace (from = "$BASE_URL", to=config.base_url)}}">
             {{item.name}}
